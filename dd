@@ -166,8 +166,8 @@ bot.on('message', (message) => {
 
     // MEME
     if (commandIs('الوان', message)) {
-        var meme = random(1, memes.length);
-        message.channel.sendFile(memes[meme]);
+  
+        message.channel.send(memes[Math.floor(Math.random() * memes.length)]);;
     }
 
     // ADMIN CUSTOM PREFIX
