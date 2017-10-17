@@ -3,7 +3,7 @@
 
 const discord = require('discord.js');
 const bot = new discord.Client();
-const token = 'MzY5NTg4NzYyNDc0MzE1Nzc2.DMeEgg.rkDuQD_gpWzc7SlmOBK7w4dgRcM'; // <-- Enter your Bot's Token Here
+const token = ''; // <-- Enter your Bot's Token Here
 const ownerID = '211854662716882944'; // <-- Enter your User ID Here
 
 // VARIABLES
