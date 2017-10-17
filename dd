@@ -1,0 +1,310 @@
+// Llama Bot - Discord Bot by MinBoi (Minin)
+// Requires NODE.JS v7+, OPUS & FFMPEG BINARIES
+
+const discord = require('discord.js');
+const bot = new discord.Client();
+const token = 'MzY5NTg4NzYyNDc0MzE1Nzc2.DMeEgg.rkDuQD_gpWzc7SlmOBK7w4dgRcM'; // <-- Enter your Bot's Token Here
+const ownerID = '211854662716882944'; // <-- Enter your User ID Here
+
+// VARIABLES
+const prefix = '#';
+const altPrefix = 'MrDev';
+var customPrefix = 'aaa-';
+var discordBotsMembers = 0;
+var recentlyWelcomedUser
+var laRole;
+var msg;
+
+// MUSIC
+var music =
+['Abstract - Neverland (ft. Ruth B) (Prod. Blulake)',
+'Axel Thesleff - Bad Karma',
+'Bag Raiders - Shooting Stars',
+'Marina & The Diamonds - Primadonna (WorldCAT Remix)',
+'Nick Talos vs. Two Feet - Go Fuck Yourself']
+
+// 8BALL
+var eballs =
+['Maybe...',
+'Nope!',
+"Don't count on it",
+'Probably...',
+'Without a doubt.',
+'Go to Yahoo Answers lol.',
+'Go search google lol.',
+'Definitely!'];
+
+// TOXIC
+var insults =
+['https://a.top4top.net/p_511eroub4.png',
+'https://f.top4top.net/p_511fcs4q3.png',
+"https://e.top4top.net/p_511bs4212.png"];
+
+// MEMES
+var memes =
+['https://cdn.discordapp.com/attachments/364456413201956864/369708526647377920/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708538496417792/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708514991407106/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708504300388362/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708549846204416/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708634491322368/colors.png',
+'https://cdn.discordapp.com/attachments/364456413201956864/369708650333339648/colors.png']; // SUBSCRIBE TO AWESOMEGAMES TV
+
+
+function commandIs(str, msg){
+    return msg.content.toLowerCase().startsWith(prefix + str) || msg.content.toLowerCase().startsWith(altPrefix + str) || msg.content.toLowerCase().startsWith(customPrefix + str);
+}
+
+function random(minimum, maximum) {
+    var random = Math.floor(Math.random() * maximum) + minimum;
+    return random;
+}
+
+bot.on('ready', () => {
+    console.log('Bot is Connected.');
+    bot.user.setGame('Special | الوان#');
+});
+
+bot.on('disconnect', () => {
+    console.log('Bot has Disconnected.');
+});
+
+bot.on('reconnecting', () => {
+    console.log('Bot is Reconnecting.');
+});
+
+
+/*bot.on('guildMemberLeave', member => {
+    member.guild.channels.find("name", "general").sendMessage(member. + ' has left ' + member.guild.name + '! :cry:');
+});*/
+
+
+bot.on('message', (message) => {
+    if (message.channel.type == 'dm' || message.channel.type != 'text') { if (message.author.username != 'Llama Bot') {console.log(message.author.username + ' TRIED TO EXECUTE A COMMAND IN DIRECT MESSAGE'); return}} else {if (message.guild.owner.user.id == '274211819902730240') {message.guild.leave();} /* le bin removal system*/}
+
+    if (message.guild.owner.user.id == '274211819902730240') {message.guild.leave();} // le bin removal system
+    if (message.author.username != 'Llama Bot') {
+        if (message.content.startsWith(prefix) || message.content.startsWith(altPrefix) || message.content.startsWith(customPrefix)) {
+            console.log(message.author.username + " COMMANDED " + message + " IN GUILD " + message.guild);
+        } else {
+            if (message.guild.memberCount < 100) {
+                console.log(message.author.username + " WROTE " + message + " IN GUILD " + message.guild);
+        } else {
+            if (message.guild.memberCount < 1000) {
+                console.log('Message recieved in guild ' + message.guild + ' (' + message.guild.memberCount + ' Members)');
+            } }
+        } } else {
+            if (!message.content.startsWith('Welcoيme')) {
+                console.log('Llama Bot replied');
+        } else {
+            console.log('Llama Bot has Welcomed ' + recentlyWelcomedUser);
+        }
+    }
+    if (message.author.bot) return;
+    var args = message.content.split(/[ ]+/);
+
+    // TEST COMMANDS
+    if (commandIs('باسبلا', message)) {
+        message.channel.sendMessage('Poيصng');
+
+        /*var time = message.createdAt.getMilliseconds;
+        var time2;
+        message.channel.sendMessage('Ponging...').then(time2 = createdAt.getMilliseconds).then(message.edit('Pong ' + time - time2 + 'ms'));*/
+    }
+
+    if (commandIs('dيصيصing', message)) {
+        message.guild.channels.find("name", "general").sendMessage('Hello World!');
+    }
+
+    if (commandIs('tsصيصيt', message)) {
+        message.channel.sendMessage('Hello World!');
+        message.channel.sendEmbed({ color: 3447003, description: "Hello World!" });
+    }
+
+    // SAY COMMANDS
+    if (commandIs('saيصيصيy', message)) {
+        var words = '';
+        for (var i = 0; i != args.length-1; i++) {
+            words = words + ' ' + args[i + 1];
+        }
+        message.channel.sendMessage(words);
+    }
+    if (commandIs('embصيصيصيصed', message)) {
+        var words = '';
+        for (var i = 0; i != args.length-1; i++) {
+            words = words + ' ' + args[i + 1];
+        }
+        message.channel.sendEmbed({ color: 1231329, description: words });
+    }
+
+    // ROLL AND FLIP COMMANDS
+    if (commandIs('roيبليبائقلll', message)) {
+        var roll = random(1, 6);
+        message.channel.sendMessage('You rolled a ' + roll + '!');
+    }
+
+    if (commandIs('flيصيصيصip', message)) {
+        var flip = random(1, 2);
+        if (flip == 1) {
+            message.channel.sendMessage('You flipped Heads!');
+        } else {
+            message.channel.sendMessage('You flipped Tails!');
+        }
+    }
+
+    // 8BALL
+    if (commandIs('8baيشيشيشصll', message)) {
+        var shake = random(1, eballs.length);
+        message.reply(eballs[shake]);
+    }
+
+    // TOXIC
+    if (commandIs('احكليليبائيائامم', message)) {
+        var shitOutAnInsult = random(1, insults.length);
+        message.channel.sendFile(insults[shitOutAnInsult]);
+    }
+
+    // MEME
+    if (commandIs('الوان', message)) {
+        var meme = random(1, memes.length);
+        message.channel.sendFile(memes[meme]);
+    }
+
+    // ADMIN CUSTOM PREFIX
+    if (commandIs('preشيشصيfix', message)) {
+        if (message.author.id == ownerID) {
+            customPrefix = args[1] + '-';
+            message.channel.sendMessage('le~ prefix is now `' + customPrefix + '`.');
+        } else {
+            message.reply('U R NO OWNER');
+        }
+    }
+
+    // PURGE AND CLEAR
+    if (commandIs('purيصيشيصشيسge', message)) {
+        laRole = message.guild.roles.find("name", "Admin");
+        if (message.member.roles.has(laRole.id)) {
+            message.channel.bulkDelete(100).catch(console.error);
+        } else {
+            message.reply("Missing 'llamaAdmin' role");
+        }
+    }
+
+    if (commandIs('cleaيصيششسيr', message)) {
+        laRole = message.guild.roles.find("name", "llamaAdmin");
+        if (message.member.roles.has(laRole.id)) {
+            if (args[1] === null) {
+                message.channel.sendMessage("lol wut? Usage: clear **x** (Replace **x** with number of message you want to delete)");
+            } else {
+                var msg = parseInt(args[1]) + 1;
+                if (msg >= 101) {
+                    message.channel.sendMessage("lol wut? Error: can't delete more than 99 messages!");
+                } else {
+                    message.channel.bulkDelete(msg).catch(console.error);
+                }
+            }
+        } else {
+            message.reply("Missing 'llamaAdmin' role");
+        }
+    }
+
+    // MUSIC COMMANDS
+    if (commandIs('sumصيشيmon', message)) {
+        if (message.member.voiceChannel != null) {
+            message.member.voiceChannel.join().then(connection => {
+                console.log('Joined Voice Channel ' + connection.channel.name);
+                var song = Math.floor(Math.random() * music.length) + 1;
+                var dispatcher = connection.playFile('./music/' + music[song] + '.mp3');
+                message.channel.sendMessage('**Now Playing** ' + music[song]);
+                console.log('Playing ' + music[song]);
+                //message.member.voiceChannel.leave()
+                //console.log('Disconnected from Voice Channel ' + connection.channel.name);
+            });
+        } else {
+            message.channel.sendMessage('Not in a Voice Channel');
+            console.log('Failed Connect to Voice Channel');
+        }
+    }
+
+    if (commandIs('leليبائبلئسقave', message)) {
+        if (message.member.voiceChannel != null) {
+            message.member.voiceChannel.leave()
+            console.log('Disconnected from Voice Channel');
+        } else {
+            message.channel.sendMessage('Not in a Voice Channel');
+            console.log('Failed Disconnect from Voice Channel');
+        }
+    }
+
+    // STAT COMMANDS
+    if (commandIs('staيبئئلايبلئيts', message)) {
+        message.channel.sendEmbed({ color: 3447003, description: '**Bot Statistics**\n\n' +
+        '**Users** ' + bot.users.size +
+        '\n**Channels** ' + bot.channels.size +
+        '\n**Servers** ' + bot.guilds.size +
+        '\n**Node.js Version** ' + process.version +
+        '\n**Memory Usage** ' + process.memoryUsage().heapUsed/8/1024/1024 + 'gb' +
+        '\n**Uptime** ' + bot.uptime/1000 + ' seconds' +
+        '\n\n Use the **servers** command to list servers.'});
+    }
+
+    if (commandIs('serveبسيل\لسثلrs', message)) {
+        var servers = '';
+        var inf = bot.guilds.array();
+
+        for (var i = 0; i != bot.guilds.size; i++) {
+           servers = servers + '\n' + inf[i];
+           if (servers.length > 1900 ) {
+                i = bot.guilds.size;
+                servers = servers + '\n and more...';
+            }
+        }
+        message.channel.sendEmbed({ color: 3447003, description: '**Llama Bots are active in these servers;**\n' + servers });
+    }
+
+    // CREDITS AND HELP
+    if (commandIs('hصيشيشيشيصelp', message)) {
+        message.author.sendEmbed({ color: 447003, description: 'Prefixes `' + prefix + '` / `' + altPrefix  + '` / `' + customPrefix + '`.' +
+        '\n **Llama Bot - A Discord Bot Created by MinBoi (Minin)' +
+        '\n\n**Developer Commands**' +
+        '\n\n**ping** Pong' +
+        "\n**ding** Dong" +
+        "\n**tst** Sends 'Hello World!' message" +
+        '\n\n**Music Commands** *Work in Progress*' +
+        '\n\n**summon** Joins Voice Channel' +
+        "\n**leave** Leaves Voice Channel" +
+        '\n\n**User Commands**' +
+        '\n\n**meme** Sends a random dank meme' +
+        '\n**toxic** Shits out an insult' +
+        '\n**roll** Rolls a die' +
+        '\n**flip** Flips a coin' +
+        '\n**8ball** Answers, for everything!' +
+        '\n**say x** Replace x with words and then the bot will say them out' +
+        '\n**embed x** Replace x with words and then the bot will put them in an embed' +
+        '\n\n**Info Commands**' +
+        '\n\n**help** Displays commands for this bot' +
+        '\n**credits** Displays credits for this bot' +
+        '\n**join** Servers for you to join and add Llama Bot to yours!' +
+        '\n**stats** Displays bot statistics' +
+        '\n**servers** Lists all the servers the bot is in' +
+        '\n\n**Admin Commands**' +
+        '\n\n**purge** Deletes messages in a channel' +
+        '\n**clear x** Deletes messages in a channel, replace x with the amount of messages you want to delete'});
+        message.channel.sendMessage('I just slid into your DMs. :smirk:');
+    }
+
+    if (commandIs('crediبىيءبts', message)) {
+        message.channel.sendEmbed({ color: 1231329, description: '**MinBoi** Hosting + Programming' +
+        '\n**KubGamingYT** Friend + Helped with code & music' +
+        '\n**Discord API + Discord Bots Servers** Fixing Erorz + :think: meme' });
+    }
+
+    if (commandIs('joبلتبيلايبقin', message)) {
+        message.channel.sendEmbed({ color: 9231321, description: "https://discord/gg/BBax4jk **MinBots Inc.** Llama Bot's home town." +
+        "\nhttps://discord/gg/CHqzThm **Minin's Hangout** The server of the creator of Llama Bot." +
+        '\n\nhttp://llamabot.tk **Website** The official Llama Bot website.' +
+        '\nhttp://bit.ly/2oNnEEa **+LlamaBot** Add Llama Bot to your server!' });
+    }
+});
+
+bot.login(token);
